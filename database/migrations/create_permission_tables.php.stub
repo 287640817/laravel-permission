@@ -18,23 +18,32 @@ class CreatePermissionTables extends Migration
 
         Schema::create($tableNames['permissions'], function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('guard_name');
+            $table->string('name')->comment("权限");
+            $table->string('group_name')->comment("分组标签名");
+            $table->string('display_name')->comment("显示名");
+            $table->string('description')->comment("描述");
+            $table->string('guard_name')->comment("守卫名");
+            $table->tinyInteger('verify')->default(1)->comment('是否需要验证');
             $table->timestamps();
+
         });
+        \DB::statement("ALTER TABLE `{$tableNames['permissions']}` comment '权限表'");
 
         Schema::create($tableNames['roles'], function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('guard_name');
+            $table->string('name')->comment("角色名");
+            $table->string('description')->comment("描述");
+            $table->string('guard_name')->comment("守卫名");
             $table->timestamps();
         });
+        \DB::statement("ALTER TABLE `$tableNames['roles']` comment '角色表'");
 
         Schema::create($tableNames['model_has_permissions'], function (Blueprint $table) use ($tableNames, $columnNames) {
-            $table->unsignedInteger('permission_id');
+            $table->unsignedInteger('permission_id')->comment("权限ID");
 
-            $table->string('model_type');
-            $table->unsignedBigInteger($columnNames['model_morph_key']);
+            $table->string('model_type')->comment("用户类型");
+            $table->unsignedBigInteger($columnNames['model_morph_key'])->comment("用户ID");
+            $table->tinyInteger('verify')->default(1)->comment('是否需要验证');
             $table->index([$columnNames['model_morph_key'], 'model_type', ], 'model_has_permissions_model_id_model_type_index');
 
             $table->foreign('permission_id')
@@ -45,12 +54,13 @@ class CreatePermissionTables extends Migration
             $table->primary(['permission_id', $columnNames['model_morph_key'], 'model_type'],
                     'model_has_permissions_permission_model_type_primary');
         });
+        \DB::statement("ALTER TABLE `$tableNames['model_has_permissions']` comment '用户权限对应表'");
 
         Schema::create($tableNames['model_has_roles'], function (Blueprint $table) use ($tableNames, $columnNames) {
-            $table->unsignedInteger('role_id');
+            $table->unsignedInteger('role_id')->comment('角色ID');
 
-            $table->string('model_type');
-            $table->unsignedBigInteger($columnNames['model_morph_key']);
+            $table->string('model_type')->comment('用户类型');
+            $table->unsignedBigInteger($columnNames['model_morph_key'])->comment('用户ID');
             $table->index([$columnNames['model_morph_key'], 'model_type', ], 'model_has_roles_model_id_model_type_index');
 
             $table->foreign('role_id')
@@ -61,10 +71,11 @@ class CreatePermissionTables extends Migration
             $table->primary(['role_id', $columnNames['model_morph_key'], 'model_type'],
                     'model_has_roles_role_model_type_primary');
         });
+        \DB::statement("ALTER TABLE `$tableNames['model_has_roles']` comment '用户角色对应表'");
 
         Schema::create($tableNames['role_has_permissions'], function (Blueprint $table) use ($tableNames) {
-            $table->unsignedInteger('permission_id');
-            $table->unsignedInteger('role_id');
+            $table->unsignedInteger('permission_id')->comment("权限ID");
+            $table->unsignedInteger('role_id')->comment("角色ID");
 
             $table->foreign('permission_id')
                 ->references('id')
@@ -78,7 +89,7 @@ class CreatePermissionTables extends Migration
 
             $table->primary(['permission_id', 'role_id'], 'role_has_permissions_permission_id_role_id_primary');
         });
-
+        \DB::statement("ALTER TABLE `$tableNames['role_has_permissions']` comment '角色权限对应表'");
         app('cache')
             ->store(config('permission.cache.store') != 'default' ? config('permission.cache.store') : null)
             ->forget(config('permission.cache.key'));
