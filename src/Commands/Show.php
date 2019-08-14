@@ -10,10 +10,10 @@ use Spatie\Permission\Models\Permission;
 class Show extends Command
 {
     protected $signature = 'permission:show
-            {guard? : The name of the guard}
-            {style? : The display style (default|borderless|compact|box)}';
+            {guard? : 路由守卫名}
+            {style? : 显示样式 (default|borderless|compact|box)}';
 
-    protected $description = 'Show a table of roles and permissions per guard';
+    protected $description = '显示每个守卫的角色和权限表';
 
     public function handle()
     {
@@ -27,7 +27,7 @@ class Show extends Command
         }
 
         foreach ($guards as $guard) {
-            $this->info("Guard: $guard");
+            $this->info("路由守卫: $guard");
 
             $roles = Role::whereGuardName($guard)->orderBy('name')->get()->mapWithKeys(function (Role $role) {
                 return [$role->name => $role->permissions->pluck('name')];

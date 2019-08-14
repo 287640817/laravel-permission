@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 interface Role
 {
     /**
-     * A role may be given various permissions.
+     * 角色权限对应.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function permissions(): BelongsToMany;
 
     /**
-     * Find a role by its name and guard name.
+     * 通过角色名和守卫超找角色.
      *
      * @param string $name
      * @param string|null $guardName
@@ -26,7 +26,7 @@ interface Role
     public static function findByName(string $name, $guardName): self;
 
     /**
-     * Find a role by its id and guard name.
+     * 通过id和守卫名查找角色.
      *
      * @param int $id
      * @param string|null $guardName
@@ -38,7 +38,7 @@ interface Role
     public static function findById(int $id, $guardName): self;
 
     /**
-     * Find or create a role by its name and guard name.
+     * 查找创建角色通过 name and guard name.
      *
      * @param string $name
      * @param string|null $guardName
@@ -48,7 +48,7 @@ interface Role
     public static function findOrCreate(string $name, $guardName): self;
 
     /**
-     * Determine if the user may perform the given permission.
+     * 确认用户时候有指定的权限.
      *
      * @param string|\Spatie\Permission\Contracts\Permission $permission
      *

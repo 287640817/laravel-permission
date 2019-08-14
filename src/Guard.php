@@ -7,6 +7,8 @@ use Illuminate\Support\Collection;
 class Guard
 {
     /**
+     * 返回（guard name）属性的集合（如果类或对象上存在）
+     *否则将返回config/auth.php中存在的保护名称集合。
      * return collection of (guard_name) property if exist on class or object
      * otherwise will return collection of guards names that exists in config/auth.php.
      * @param $model

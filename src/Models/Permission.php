@@ -48,7 +48,7 @@ class Permission extends Model implements PermissionContract
     }
 
     /**
-     * A permission can be applied to roles.
+     * 权限角色对应关系.
      */
     public function roles(): BelongsToMany
     {
@@ -61,6 +61,7 @@ class Permission extends Model implements PermissionContract
     }
 
     /**
+     * 权限属于与其保护关联的模型的某些用户
      * A permission belongs to some users of the model associated with its guard.
      */
     public function users(): MorphToMany
@@ -75,6 +76,7 @@ class Permission extends Model implements PermissionContract
     }
 
     /**
+     * 按其名称（和可选的guardname）查找权限
      * Find a permission by its name (and optionally guardName).
      *
      * @param string $name
@@ -96,6 +98,7 @@ class Permission extends Model implements PermissionContract
     }
 
     /**
+     * 通过其ID（和可选的guardname）查找权限。
      * Find a permission by its id (and optionally guardName).
      *
      * @param int $id
@@ -118,6 +121,7 @@ class Permission extends Model implements PermissionContract
     }
 
     /**
+     * 通过其名称（和可选的guardname）查找或创建权限。
      * Find or create permission by its name (and optionally guardName).
      *
      * @param string $name
@@ -138,7 +142,7 @@ class Permission extends Model implements PermissionContract
     }
 
     /**
-     * Get the current cached permissions.
+     * 获取当前权限的缓存.
      */
     protected static function getPermissions(array $params = []): Collection
     {

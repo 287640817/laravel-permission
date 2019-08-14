@@ -9,14 +9,14 @@ class CacheReset extends Command
 {
     protected $signature = 'permission:cache-reset';
 
-    protected $description = 'Reset the permission cache';
+    protected $description = '重置权限缓存';
 
     public function handle()
     {
         if (app(PermissionRegistrar::class)->forgetCachedPermissions()) {
-            $this->info('Permission cache flushed.');
+            $this->info('权限缓存成功.');
         } else {
-            $this->error('Unable to flush cache.');
+            $this->error('无法刷新缓存.');
         }
     }
 }

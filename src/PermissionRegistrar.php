@@ -91,7 +91,7 @@ class PermissionRegistrar
     }
 
     /**
-     * Register the permission check method on the gate.
+     * 在gate上注册权限检查方法.
      *
      * @return bool
      */
@@ -110,7 +110,7 @@ class PermissionRegistrar
     }
 
     /**
-     * Flush the cache.
+     * 刷新缓存.
      */
     public function forgetCachedPermissions()
     {
@@ -120,7 +120,7 @@ class PermissionRegistrar
     }
 
     /**
-     * Get the permissions based on the passed params.
+     * 根据传递的参数获取权限.
      *
      * @param array $params
      *
@@ -146,7 +146,7 @@ class PermissionRegistrar
     }
 
     /**
-     * Get an instance of the permission class.
+     * 获取权限类的一个实例.
      *
      * @return \Spatie\Permission\Contracts\Permission
      */
@@ -163,7 +163,7 @@ class PermissionRegistrar
     }
 
     /**
-     * Get an instance of the role class.
+     * 获取角色类的一个实例.
      *
      * @return \Spatie\Permission\Contracts\Role
      */
@@ -173,7 +173,7 @@ class PermissionRegistrar
     }
 
     /**
-     * Get the instance of the Cache Store.
+     * 获取缓存类的实例.
      *
      * @return \Illuminate\Contracts\Cache\Store
      */

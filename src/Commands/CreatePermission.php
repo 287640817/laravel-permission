@@ -8,10 +8,10 @@ use Spatie\Permission\Contracts\Permission as PermissionContract;
 class CreatePermission extends Command
 {
     protected $signature = 'permission:create-permission 
-                {name : The name of the permission} 
-                {guard? : The name of the guard}';
+                {name : 权限名} 
+                {guard? : 路由守卫名}';
 
-    protected $description = 'Create a permission';
+    protected $description = '创建一个权限';
 
     public function handle()
     {
@@ -19,6 +19,6 @@ class CreatePermission extends Command
 
         $permission = $permissionClass::findOrCreate($this->argument('name'), $this->argument('guard'));
 
-        $this->info("Permission `{$permission->name}` created");
+        $this->info("权限 `{$permission->name}` 创建成功");
     }
 }

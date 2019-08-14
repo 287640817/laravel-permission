@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 interface Permission
 {
     /**
-     * A permission can be applied to roles.
+     * 权限角色关联表.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function roles(): BelongsToMany;
 
     /**
-     * Find a permission by its name.
+     * 通过权限名查找权限.
      *
      * @param string $name
      * @param string|null $guardName
@@ -26,7 +26,7 @@ interface Permission
     public static function findByName(string $name, $guardName): self;
 
     /**
-     * Find a permission by its id.
+     * 通过权限ID查找权限.
      *
      * @param int $id
      * @param string|null $guardName
@@ -38,7 +38,7 @@ interface Permission
     public static function findById(int $id, $guardName): self;
 
     /**
-     * Find or Create a permission by its name and guard name.
+     * 查找创建角色.
      *
      * @param string $name
      * @param string|null $guardName

@@ -45,6 +45,7 @@ class Role extends Model implements RoleContract
     }
 
     /**
+     * 可以为角色授予各种权限。
      * A role may be given various permissions.
      */
     public function permissions(): BelongsToMany
@@ -58,6 +59,7 @@ class Role extends Model implements RoleContract
     }
 
     /**
+     * 角色属于与其防护关联的模型的某些用户。
      * A role belongs to some users of the model associated with its guard.
      */
     public function users(): MorphToMany
@@ -72,6 +74,7 @@ class Role extends Model implements RoleContract
     }
 
     /**
+     * 按角色的名称和保护名称查找角色。
      * Find a role by its name and guard name.
      *
      * @param string $name
@@ -108,6 +111,7 @@ class Role extends Model implements RoleContract
     }
 
     /**
+     * 通过角色的名称（和可选的guardname）查找或创建角色。
      * Find or create role by its name (and optionally guardName).
      *
      * @param string $name
@@ -129,6 +133,7 @@ class Role extends Model implements RoleContract
     }
 
     /**
+     * 确定用户是否可以执行给定的权限。
      * Determine if the user may perform the given permission.
      *
      * @param string|Permission $permission

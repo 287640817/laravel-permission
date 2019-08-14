@@ -18,7 +18,7 @@ class CreatePermissionTables extends Migration
 
         Schema::create($tableNames['permissions'], function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->comment("权限");
+            $table->string('name')->comment("权限（路由名）");
             $table->string('group_name')->comment("分组标签名");
             $table->string('display_name')->comment("显示名");
             $table->string('description')->comment("描述");
@@ -32,6 +32,7 @@ class CreatePermissionTables extends Migration
         Schema::create($tableNames['roles'], function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->comment("角色名");
+            $table->string('display_name')->comment("显示名");
             $table->string('description')->comment("描述");
             $table->string('guard_name')->comment("守卫名");
             $table->timestamps();
@@ -43,7 +44,7 @@ class CreatePermissionTables extends Migration
 
             $table->string('model_type')->comment("用户类型");
             $table->unsignedBigInteger($columnNames['model_morph_key'])->comment("用户ID");
-            $table->tinyInteger('verify')->default(1)->comment('是否需要验证');
+            $table->tinyInteger('verify')->default(1)->comment('是否有效');
             $table->index([$columnNames['model_morph_key'], 'model_type', ], 'model_has_permissions_model_id_model_type_index');
 
             $table->foreign('permission_id')
@@ -58,7 +59,6 @@ class CreatePermissionTables extends Migration
 
         Schema::create($tableNames['model_has_roles'], function (Blueprint $table) use ($tableNames, $columnNames) {
             $table->unsignedInteger('role_id')->comment('角色ID');
-
             $table->string('model_type')->comment('用户类型');
             $table->unsignedBigInteger($columnNames['model_morph_key'])->comment('用户ID');
             $table->index([$columnNames['model_morph_key'], 'model_type', ], 'model_has_roles_model_id_model_type_index');

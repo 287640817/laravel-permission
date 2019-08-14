@@ -9,11 +9,11 @@ use Spatie\Permission\Contracts\Permission as PermissionContract;
 class CreateRole extends Command
 {
     protected $signature = 'permission:create-role
-        {name : The name of the role}
-        {guard? : The name of the guard}
-        {permissions? : A list of permissions to assign to the role, separated by | }';
+        {name : 角色名}
+        {guard? : 路由守卫名}
+        {permissions? : 分配给角色的权限列表，由 | 分隔}';
 
-    protected $description = 'Create a role';
+    protected $description = '创建一个角色';
 
     public function handle()
     {
@@ -23,7 +23,7 @@ class CreateRole extends Command
 
         $role->givePermissionTo($this->makePermissions($this->argument('permissions')));
 
-        $this->info("Role `{$role->name}` created");
+        $this->info("角色 `{$role->name}` 创建成功");
     }
 
     protected function makePermissions($string = null)

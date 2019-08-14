@@ -149,6 +149,7 @@ class PermissionServiceProvider extends ServiceProvider
     }
 
     /**
+     * 返回现有迁移文件（如果找到），否则使用当前时间戳。
      * Returns existing migration file if found, else uses the current timestamp.
      *
      * @param Filesystem $filesystem
