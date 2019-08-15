@@ -24,7 +24,7 @@ class CreatePermissionTables extends Migration
             $table->string('display_name')->comment("显示名");
             $table->string('description')->comment("描述");
             $table->string('guard_name')->comment("守卫名");
-            $table->string('pid')->comment("父级ID");
+            $table->string('parent_id')->comment("父级ID");
             $table->tinyInteger('verify')->default(1)->comment('是否需要验证');
             $table->timestamps();
 
